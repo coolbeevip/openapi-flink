@@ -133,11 +133,6 @@
       <artifactId>gson-fire</artifactId>
       <version>${gson-fire.version}</version>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>org.threeten</groupId>-->
-<!--      <artifactId>threetenbp</artifactId>-->
-<!--      <version>${threetenbp.version}</version>-->
-<!--    </dependency>-->
 
     <!-- test -->
     <dependency>
@@ -192,7 +187,25 @@
               <generateModelTests>false</generateModelTests>
               <configOptions>
                 <sourceFolder>src/gen/java/main</sourceFolder>
+                <parentArtifactId>${project.parent.artifactId}</parentArtifactId>
+                <parentGroupId>${project.parent.groupId}</parentGroupId>
+                <parentVersion>${project.parent.version}</parentVersion>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>${project.artifactId}</artifactId>
+                <artifactUrl>https://github.com/coolbeevip/openapi-flink</artifactUrl>
+                <artifactVersion>${project.version}</artifactVersion>
+                <artifactDescription>Java library for managing Apache Flink via the REST API</artifactDescription>
+                <developerEmail>zhanglei@apache.org</developerEmail>
+                <developerName>Lei Zhang</developerName>
+                <developerOrganization>${project.organization.name}</developerOrganization>
+                <developerOrganizationUrl>https://github.com/coolbeevip</developerOrganizationUrl>
+                <licenseName>Apache License, Version 2.0</licenseName>
+                <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.txt</licenseUrl>
+                <scmConnection>scm:git:git@github.com:coolbeevip/openapi-flink.git</scmConnection>
+                <scmDeveloperConnection>scm:git:git@github.com:coolbeevip/openapi-flink.git</scmDeveloperConnection>
+                <scmUrl>https://github.com/coolbeevip/openapi-flink</scmUrl>
                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                <useJakartaEe>false</useJakartaEe>
               </configOptions>
               <globalProperties>
                 <skipFormModel>false</skipFormModel>
