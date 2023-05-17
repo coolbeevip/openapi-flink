@@ -1,0 +1,21 @@
+## Porject
+logs/
+work/
+ndcp-collector-server/work
+**/dependency-reduced-pom.xml
+job_response.html
+**/.flattened-pom.xml
+
+## IntelliJ
+.idea
+*.iws
+*.iml
+*.ipr
+${env.M2_HOME}/*
+**/target/
+
+## MacOS
+.DS_Store
+hdfs.keytab
+hdfs-site.xml
+krb5.conf
