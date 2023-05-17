@@ -2,11 +2,11 @@ openapi: 3.0.1
 info:
   title: Flink REST API
   contact:
-    email: user@flink.apache.org
+    email: coolbeevip@gmail.com
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v1/1.15-SNAPSHOT
+  version: v1/1.15
 paths:
   /cluster:
     delete:

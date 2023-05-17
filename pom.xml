@@ -206,6 +206,7 @@
                 <scmUrl>https://github.com/coolbeevip/openapi-flink</scmUrl>
                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
                 <useJakartaEe>false</useJakartaEe>
+                <documentationProvider>none</documentationProvider>
               </configOptions>
               <globalProperties>
                 <skipFormModel>false</skipFormModel>
