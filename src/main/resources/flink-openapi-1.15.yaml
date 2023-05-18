@@ -344,7 +344,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MetricCollectionResponseBody'
+                $ref: '#/components/schemas/MetricsResponseBody'
   /jobmanager/thread-dump:
     get:
       description: Returns the thread dump of the JobManager.
@@ -428,7 +428,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AggregatedMetricsResponseBody'
+                $ref: '#/components/schemas/MetricsResponseBody'
   /jobs/overview:
     get:
       description: Returns an overview over all jobs.
@@ -683,7 +683,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MetricCollectionResponseBody'
+                $ref: '#/components/schemas/MetricsResponseBody'
   /jobs/{jobid}/plan:
     get:
       description: Returns the dataflow plan of a job.
@@ -959,7 +959,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MetricCollectionResponseBody'
+                $ref: '#/components/schemas/MetricsResponseBody'
   /jobs/{jobid}/vertices/{vertexid}/subtasks/accumulators:
     get:
       description: Returns all user-defined accumulators for all subtasks of a task.
@@ -1339,7 +1339,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AggregatedMetricsResponseBody'
+                $ref: '#/components/schemas/AggregatedTaskManagersMetricsResponseBody'
   /taskmanagers/{taskmanagerid}:
     get:
       description: Returns details for a task manager. "metrics.memorySegmentsAvailable"
@@ -1399,7 +1399,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MetricCollectionResponseBody'
+                $ref: '#/components/schemas/TaskManagersMetricsResponseBody'
   /taskmanagers/{taskmanagerid}/thread-dump:
     get:
       description: Returns the thread dump of the requested TaskManager.
@@ -1610,7 +1610,7 @@ components:
             type: integer
             format: int32
         plan:
-          type: string
+          type: object
     IOMetricsInfo:
       type: object
       properties:
@@ -1714,6 +1714,32 @@ components:
           $ref: '#/components/schemas/JobVertexID'
         name:
           type: string
+        status:
+          type: string
+          enum:
+            - CREATED
+            - SCHEDULED
+            - DEPLOYING
+            - RUNNING
+            - FINISHED
+            - CANCELING
+            - CANCELED
+            - FAILED
+            - RECONCILING
+            - INITIALIZING
+        start-time:
+          type: integer
+          format: int64
+        end-time:
+          type: integer
+          format: int64
+        duration:
+          type: integer
+          format: int64
+        tasks:
+          type: object
+        metrics:
+          type: object
         parallelism:
           type: integer
           format: int32
@@ -1726,7 +1752,9 @@ components:
         subtasks:
           type: array
           items:
-            $ref: '#/components/schemas/SubtaskExecutionAttemptDetailsInfo'
+            type:
+              object
+            # $ref: '#/components/schemas/SubtaskExecutionAttemptDetailsInfo'
     DistributedCacheFile:
       type: object
       properties:
@@ -1942,6 +1970,51 @@ components:
           type: string
         flink-commit:
           type: string
+    Metrics:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        value:
+          type: object
+    MetricsResponseBody:
+      type: array
+      items:
+        $ref: '#/components/schemas/Metrics'
+    AggregatedTaskManagersMetrics:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        min:
+          type: object
+        max:
+          type: object
+        avg:
+          type: object
+        sum:
+          type: object
+    AggregatedTaskManagersMetricsResponseBody:
+      type: array
+      items:
+        $ref: '#/components/schemas/AggregatedTaskManagersMetrics'
+    TaskManagersMetrics:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        value:
+          type: object
+    TaskManagersMetricsResponseBody:
+      type: array
+      items:
+        $ref: '#/components/schemas/TaskManagersMetrics'
     AggregatedMetricsResponseBody:
       type: object
     SubtasksAllAccumulatorsInfo:
