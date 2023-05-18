@@ -85,6 +85,7 @@
 
     <!-- maven plugin -->
     <swagger-codegen-maven-plugin.version>3.0.42</swagger-codegen-maven-plugin.version>
+    <openapi-generator-maven-plugin.version>6.6.0</openapi-generator-maven-plugin.version>
     <maven-surefire-plugin.version>3.1.0</maven-surefire-plugin.version>
     <maven-site-plugin.version>3.7.1</maven-site-plugin.version>
     <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
@@ -172,7 +173,7 @@
       <plugin>
         <groupId>org.openapitools</groupId>
         <artifactId>openapi-generator-maven-plugin</artifactId>
-        <version>6.6.0</version>
+        <version>${openapi-generator-maven-plugin.version}</version>
         <executions>
           <execution>
             <goals>
