@@ -1808,11 +1808,13 @@ components:
         summary:
           $ref: '#/components/schemas/Summary'
         latest:
-          $ref: '#/components/schemas/LatestCheckpoints'
+          type: object
+          #$ref: '#/components/schemas/LatestCheckpoints'
         history:
           type: array
           items:
-            $ref: '#/components/schemas/CheckpointStatistics'
+            type: object
+            #$ref: '#/components/schemas/CheckpointStatistics'
     HardwareDescription:
       type: object
       properties:
@@ -2064,11 +2066,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/CheckpointStatistics'
         - type: object
-          properties:
-            external_path:
-              type: string
-            discarded:
-              type: boolean
     JarRunRequestBody:
       type: object
       properties:
@@ -2903,6 +2900,12 @@ components:
         alignment:
           $ref: '#/components/schemas/CheckpointAlignment'
         start_delay:
+          $ref: '#/components/schemas/StatsSummaryDto'
+        alignment_buffered:
+          $ref: '#/components/schemas/StatsSummaryDto'
+        processed_data:
+          $ref: '#/components/schemas/StatsSummaryDto'
+        persisted_data:
           $ref: '#/components/schemas/StatsSummaryDto'
     IntermediateDataSetID:
       pattern: "[0-9a-f]{32}"

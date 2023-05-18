@@ -99,6 +99,17 @@ class FlinkApiTest {
   }
 
   @Test
+  void jobsJobidCheckpointsGetTest() throws ApiException {
+    api.jobsGet().getJobs().forEach(jobIdWithStatus -> {
+      try {
+        print(api.jobsJobidCheckpointsGet(jobIdWithStatus.getId()));
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    });
+  }
+
+  @Test
   void jobsJobidMetricsGetTest() throws ApiException {
     api.jobsGet().getJobs().forEach(jobIdWithStatus -> {
       try {
