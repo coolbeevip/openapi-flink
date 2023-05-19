@@ -10,12 +10,16 @@ info:
 paths:
   /cluster:
     delete:
+      tags:
+        - flink
       description: Shuts down the cluster
       responses:
         "200":
           description: The request was successful.
   /config:
     get:
+      tags:
+        - flink
       description: Returns the configuration of the WebUI.
       responses:
         "200":
@@ -26,6 +30,8 @@ paths:
                 $ref: '#/components/schemas/DashboardConfiguration'
   /datasets:
     get:
+      tags:
+        - flink
       description: Returns all cluster data sets.
       responses:
         "200":
@@ -36,6 +42,8 @@ paths:
                 $ref: '#/components/schemas/ClusterDataSetListResponseBody'
   /datasets/delete/{triggerid}:
     get:
+      tags:
+        - flink
       description: Returns the status for the delete operation of a cluster data set.
       parameters:
         - name: triggerid
@@ -54,6 +62,8 @@ paths:
                 $ref: '#/components/schemas/AsynchronousOperationResult'
   /datasets/{datasetid}:
     delete:
+      tags:
+        - flink
       description: Triggers the deletion of a cluster data set. This async operation
         would return a 'triggerid' for further query identifier.
       parameters:
@@ -73,6 +83,8 @@ paths:
                 $ref: '#/components/schemas/TriggerResponse'
   /jars:
     get:
+      tags:
+        - flink
       description: Returns a list of all jars previously uploaded via '/jars/upload'.
       responses:
         "200":
@@ -83,6 +95,8 @@ paths:
                 $ref: '#/components/schemas/JarListInfo'
   /jars/upload:
     post:
+      tags:
+        - flink
       description: "Uploads a jar to the cluster. The jar must be sent as multi-part\
         \ data. Make sure that the \"Content-Type\" header is set to \"application/x-java-archive\"\
         , as some http libraries do not add the header by default.\nUsing 'curl' you\
@@ -104,6 +118,8 @@ paths:
                 $ref: '#/components/schemas/JarUploadResponseBody'
   /jars/{jarid}:
     delete:
+      tags:
+        - flink
       description: Deletes a jar previously uploaded via '/jars/upload'.
       parameters:
         - name: jarid
@@ -119,6 +135,8 @@ paths:
           description: The request was successful.
   /jars/{jarid}/plan:
     get:
+      tags:
+        - flink
       description: Returns the dataflow plan of a job contained in a jar previously
         uploaded via '/jars/upload'. Program arguments can be passed both via the
         JSON request (recommended) or query parameters.
@@ -171,6 +189,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JobPlanInfo'
     post:
+      tags:
+        - flink
       description: Returns the dataflow plan of a job contained in a jar previously
         uploaded via '/jars/upload'. Program arguments can be passed both via the
         JSON request (recommended) or query parameters.
@@ -229,6 +249,8 @@ paths:
                 $ref: '#/components/schemas/JobPlanInfo'
   /jars/{jarid}/run:
     post:
+      tags:
+        - flink
       description: Submits a job by running a jar previously uploaded via '/jars/upload'.
         Program arguments can be passed both via the JSON request (recommended) or
         query parameters.
@@ -304,6 +326,8 @@ paths:
                 $ref: '#/components/schemas/JarRunResponseBody'
   /jobmanager/config:
     get:
+      tags:
+        - flink
       description: Returns the cluster configuration.
       responses:
         "200":
@@ -319,6 +343,8 @@ paths:
                   $ref: '#/components/schemas/ClusterConfigurationInfoEntry'
   /jobmanager/logs:
     get:
+      tags:
+        - flink
       description: Returns the list of log files on the JobManager.
       responses:
         "200":
@@ -329,6 +355,8 @@ paths:
                 $ref: '#/components/schemas/LogListInfo'
   /jobmanager/metrics:
     get:
+      tags:
+        - flink
       description: Provides access to job manager metrics.
       parameters:
         - name: get
@@ -347,6 +375,8 @@ paths:
                 $ref: '#/components/schemas/MetricsResponseBody'
   /jobmanager/thread-dump:
     get:
+      tags:
+        - flink
       description: Returns the thread dump of the JobManager.
       responses:
         "200":
@@ -357,6 +387,8 @@ paths:
                 $ref: '#/components/schemas/ThreadDumpInfo'
   /jobs:
     get:
+      tags:
+        - flink
       description: Returns an overview over all jobs and their current state.
       responses:
         "200":
@@ -366,6 +398,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JobIdsWithStatusOverview'
     post:
+      tags:
+        - flink
       description: "Submits a job. This call is primarily intended to be used by the\
         \ Flink client. This call expects a multipart/form-data request that consists\
         \ of file uploads for the serialized JobGraph, jars and distributed cache\
@@ -392,6 +426,8 @@ paths:
                 $ref: '#/components/schemas/JobSubmitResponseBody'
   /jobs/metrics:
     get:
+      tags:
+        - flink
       description: Provides access to aggregated job metrics.
       parameters:
         - name: get
@@ -431,6 +467,8 @@ paths:
                 $ref: '#/components/schemas/MetricsResponseBody'
   /jobs/overview:
     get:
+      tags:
+        - flink
       description: Returns an overview over all jobs.
       responses:
         "200":
@@ -441,6 +479,8 @@ paths:
                 $ref: '#/components/schemas/MultipleJobsDetails'
   /jobs/{jobid}:
     get:
+      tags:
+        - flink
       description: Returns details of a job.
       parameters:
         - name: jobid
@@ -457,6 +497,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JobDetailsInfo'
     patch:
+      tags:
+        - flink
       description: Terminates a job.
       parameters:
         - name: jobid
@@ -481,6 +523,8 @@ paths:
           description: The request was successful.
   /jobs/{jobid}/accumulators:
     get:
+      tags:
+        - flink
       description: "Returns the accumulators for all tasks of a job, aggregated across\
         \ the respective subtasks."
       parameters:
@@ -507,6 +551,8 @@ paths:
                 $ref: '#/components/schemas/JobAccumulatorsInfo'
   /jobs/{jobid}/checkpoints:
     get:
+      tags:
+        - flink
       description: Returns checkpointing statistics for a job.
       parameters:
         - name: jobid
@@ -524,6 +570,8 @@ paths:
                 $ref: '#/components/schemas/CheckpointingStatistics'
   /jobs/{jobid}/checkpoints/config:
     get:
+      tags:
+        - flink
       description: Returns the checkpointing configuration.
       parameters:
         - name: jobid
@@ -541,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/CheckpointConfigInfo'
   /jobs/{jobid}/checkpoints/details/{checkpointid}:
     get:
+      tags:
+        - flink
       description: Returns details for a checkpoint.
       parameters:
         - name: jobid
@@ -565,6 +615,8 @@ paths:
                 $ref: '#/components/schemas/CheckpointStatistics'
   /jobs/{jobid}/checkpoints/details/{checkpointid}/subtasks/{vertexid}:
     get:
+      tags:
+        - flink
       description: Returns checkpoint statistics for a task and its subtasks.
       parameters:
         - name: jobid
@@ -595,6 +647,8 @@ paths:
                 $ref: '#/components/schemas/TaskCheckpointStatisticsWithSubtaskDetails'
   /jobs/{jobid}/config:
     get:
+      tags:
+        - flink
       description: Returns the configuration of a job.
       parameters:
         - name: jobid
@@ -612,6 +666,8 @@ paths:
                 $ref: '#/components/schemas/JobConfigInfo'
   /jobs/{jobid}/exceptions:
     get:
+      tags:
+        - flink
       description: "Returns the most recent exceptions that have been handled by Flink\
         \ for this job. The 'exceptionHistory.truncated' flag defines whether exceptions\
         \ were filtered out through the GET parameter. The backend collects only a\
@@ -644,6 +700,8 @@ paths:
                 $ref: '#/components/schemas/JobExceptionsInfoWithHistory'
   /jobs/{jobid}/execution-result:
     get:
+      tags:
+        - flink
       description: Returns the result of a job execution. Gives access to the execution
         time of the job and to all accumulators created by this job.
       parameters:
@@ -662,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/JobExecutionResultResponseBody'
   /jobs/{jobid}/metrics:
     get:
+      tags:
+        - flink
       description: Provides access to job metrics.
       parameters:
         - name: jobid
@@ -686,6 +746,8 @@ paths:
                 $ref: '#/components/schemas/MetricsResponseBody'
   /jobs/{jobid}/plan:
     get:
+      tags:
+        - flink
       description: Returns the dataflow plan of a job.
       parameters:
         - name: jobid
@@ -703,6 +765,8 @@ paths:
                 $ref: '#/components/schemas/JobPlanInfo'
   /jobs/{jobid}/rescaling:
     patch:
+      tags:
+        - flink
       description: Triggers the rescaling of a job. This async operation would return
         a 'triggerid' for further query identifier.
       parameters:
@@ -729,6 +793,8 @@ paths:
                 $ref: '#/components/schemas/TriggerResponse'
   /jobs/{jobid}/rescaling/{triggerid}:
     get:
+      tags:
+        - flink
       description: Returns the status of a rescaling operation.
       parameters:
         - name: jobid
@@ -753,6 +819,8 @@ paths:
                 $ref: '#/components/schemas/AsynchronousOperationResult'
   /jobs/{jobid}/savepoints:
     post:
+      tags:
+        - flink
       description: "Triggers a savepoint, and optionally cancels the job afterwards.\
         \ This async operation would return a 'triggerid' for further query identifier."
       parameters:
@@ -776,6 +844,8 @@ paths:
                 $ref: '#/components/schemas/TriggerResponse'
   /jobs/{jobid}/savepoints/{triggerid}:
     get:
+      tags:
+        - flink
       description: Returns the status of a savepoint operation.
       parameters:
         - name: jobid
@@ -800,6 +870,8 @@ paths:
                 $ref: '#/components/schemas/AsynchronousOperationResult'
   /jobs/{jobid}/stop:
     post:
+      tags:
+        - flink
       description: "Stops a job with a savepoint. Optionally, it can also emit a MAX_WATERMARK\
         \ before taking the savepoint to flush out any state waiting for timers to\
         \ fire. This async operation would return a 'triggerid' for further query\
@@ -825,6 +897,8 @@ paths:
                 $ref: '#/components/schemas/TriggerResponse'
   /jobs/{jobid}/vertices/{vertexid}:
     get:
+      tags:
+        - flink
       description: "Returns details for a task, with a summary for each of its subtasks."
       parameters:
         - name: jobid
@@ -848,6 +922,8 @@ paths:
                 $ref: '#/components/schemas/JobVertexDetailsInfo'
   /jobs/{jobid}/vertices/{vertexid}/accumulators:
     get:
+      tags:
+        - flink
       description: "Returns user-defined accumulators of a task, aggregated across\
         \ all subtasks."
       parameters:
@@ -872,6 +948,8 @@ paths:
                 $ref: '#/components/schemas/JobVertexAccumulatorsInfo'
   /jobs/{jobid}/vertices/{vertexid}/backpressure:
     get:
+      tags:
+        - flink
       description: "Returns back-pressure information for a job, and may initiate\
         \ back-pressure sampling if necessary."
       parameters:
@@ -896,6 +974,8 @@ paths:
                 $ref: '#/components/schemas/JobVertexBackPressureInfo'
   /jobs/{jobid}/vertices/{vertexid}/flamegraph:
     get:
+      tags:
+        - flink
       description: "Returns flame graph information for a vertex, and may initiate\
         \ flame graph sampling if necessary."
       parameters:
@@ -932,6 +1012,8 @@ paths:
                 $ref: '#/components/schemas/JobVertexFlameGraph'
   /jobs/{jobid}/vertices/{vertexid}/metrics:
     get:
+      tags:
+        - flink
       description: Provides access to task metrics.
       parameters:
         - name: jobid
@@ -962,6 +1044,8 @@ paths:
                 $ref: '#/components/schemas/MetricsResponseBody'
   /jobs/{jobid}/vertices/{vertexid}/subtasks/accumulators:
     get:
+      tags:
+        - flink
       description: Returns all user-defined accumulators for all subtasks of a task.
       parameters:
         - name: jobid
@@ -985,6 +1069,8 @@ paths:
                 $ref: '#/components/schemas/SubtasksAllAccumulatorsInfo'
   /jobs/{jobid}/vertices/{vertexid}/subtasks/metrics:
     get:
+      tags:
+        - flink
       description: Provides access to aggregated subtask metrics.
       parameters:
         - name: jobid
@@ -1036,6 +1122,8 @@ paths:
                 $ref: '#/components/schemas/AggregatedMetricsResponseBody'
   /jobs/{jobid}/vertices/{vertexid}/subtasks/{subtaskindex}:
     get:
+      tags:
+        - flink
       description: Returns details of the current or latest execution attempt of a
         subtask.
       parameters:
@@ -1067,6 +1155,8 @@ paths:
                 $ref: '#/components/schemas/SubtaskExecutionAttemptDetailsInfo'
   /jobs/{jobid}/vertices/{vertexid}/subtasks/{subtaskindex}/attempts/{attempt}:
     get:
+      tags:
+        - flink
       description: Returns details of an execution attempt of a subtask. Multiple
         execution attempts happen in case of failure/recovery.
       parameters:
@@ -1105,6 +1195,8 @@ paths:
                 $ref: '#/components/schemas/SubtaskExecutionAttemptDetailsInfo'
   /jobs/{jobid}/vertices/{vertexid}/subtasks/{subtaskindex}/attempts/{attempt}/accumulators:
     get:
+      tags:
+        - flink
       description: Returns the accumulators of an execution attempt of a subtask.
         Multiple execution attempts happen in case of failure/recovery.
       parameters:
@@ -1143,6 +1235,8 @@ paths:
                 $ref: '#/components/schemas/SubtaskExecutionAttemptAccumulatorsInfo'
   /jobs/{jobid}/vertices/{vertexid}/subtasks/{subtaskindex}/metrics:
     get:
+      tags:
+        - flink
       description: Provides access to subtask metrics.
       parameters:
         - name: jobid
@@ -1180,6 +1274,8 @@ paths:
                 $ref: '#/components/schemas/MetricCollectionResponseBody'
   /jobs/{jobid}/vertices/{vertexid}/subtasktimes:
     get:
+      tags:
+        - flink
       description: Returns time-related information for all subtasks of a task.
       parameters:
         - name: jobid
@@ -1203,6 +1299,8 @@ paths:
                 $ref: '#/components/schemas/SubtasksTimesInfo'
   /jobs/{jobid}/vertices/{vertexid}/taskmanagers:
     get:
+      tags:
+        - flink
       description: Returns task information aggregated by task manager.
       parameters:
         - name: jobid
@@ -1226,6 +1324,8 @@ paths:
                 $ref: '#/components/schemas/JobVertexTaskManagersInfo'
   /jobs/{jobid}/vertices/{vertexid}/watermarks:
     get:
+      tags:
+        - flink
       description: Returns the watermarks for all subtasks of a task.
       parameters:
         - name: jobid
@@ -1249,6 +1349,8 @@ paths:
                 $ref: '#/components/schemas/MetricCollectionResponseBody'
   /overview:
     get:
+      tags:
+        - flink
       description: Returns an overview over the Flink cluster.
       responses:
         "200":
@@ -1259,6 +1361,8 @@ paths:
                 $ref: '#/components/schemas/ClusterOverviewWithVersion'
   /savepoint-disposal:
     post:
+      tags:
+        - flink
       description: Triggers the desposal of a savepoint. This async operation would
         return a 'triggerid' for further query identifier.
       requestBody:
@@ -1275,6 +1379,8 @@ paths:
                 $ref: '#/components/schemas/TriggerResponse'
   /savepoint-disposal/{triggerid}:
     get:
+      tags:
+        - flink
       description: Returns the status of a savepoint disposal operation.
       parameters:
         - name: triggerid
@@ -1293,6 +1399,8 @@ paths:
                 $ref: '#/components/schemas/AsynchronousOperationResult'
   /taskmanagers:
     get:
+      tags:
+        - flink
       description: Returns an overview over all task managers.
       responses:
         "200":
@@ -1303,6 +1411,8 @@ paths:
                 $ref: '#/components/schemas/TaskManagersInfo'
   /taskmanagers/metrics:
     get:
+      tags:
+        - flink
       description: Provides access to aggregated task manager metrics.
       parameters:
         - name: get
@@ -1342,6 +1452,8 @@ paths:
                 $ref: '#/components/schemas/AggregatedTaskManagersMetricsResponseBody'
   /taskmanagers/{taskmanagerid}:
     get:
+      tags:
+        - flink
       description: Returns details for a task manager. "metrics.memorySegmentsAvailable"
         and "metrics.memorySegmentsTotal" are deprecated. Please use "metrics.nettyShuffleMemorySegmentsAvailable"
         and "metrics.nettyShuffleMemorySegmentsTotal" instead.
@@ -1361,6 +1473,8 @@ paths:
                 $ref: '#/components/schemas/TaskManagerDetailsInfo'
   /taskmanagers/{taskmanagerid}/logs:
     get:
+      tags:
+        - flink
       description: Returns the list of log files on a TaskManager.
       parameters:
         - name: taskmanagerid
@@ -1378,6 +1492,8 @@ paths:
                 $ref: '#/components/schemas/LogListInfo'
   /taskmanagers/{taskmanagerid}/metrics:
     get:
+      tags:
+        - flink
       description: Provides access to task manager metrics.
       parameters:
         - name: taskmanagerid
@@ -1402,6 +1518,8 @@ paths:
                 $ref: '#/components/schemas/TaskManagersMetricsResponseBody'
   /taskmanagers/{taskmanagerid}/thread-dump:
     get:
+      tags:
+        - flink
       description: Returns the thread dump of the requested TaskManager.
       parameters:
         - name: taskmanagerid

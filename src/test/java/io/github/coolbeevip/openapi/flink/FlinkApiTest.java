@@ -4,7 +4,7 @@ package io.github.coolbeevip.openapi.flink;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.coolbeevip.openapi.flink.api.ApiException;
-import io.github.coolbeevip.openapi.flink.api.DefaultApi;
+import io.github.coolbeevip.openapi.flink.api.FlinkApi;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class FlinkApiTest {
-  static DefaultApi api = new DefaultApi();
+  static FlinkApi api = new FlinkApi();
   static ObjectMapper mapper = new ObjectMapper();
 
   String taskManagersMetricsGet;
