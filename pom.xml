@@ -73,11 +73,9 @@
     <!-- self -->
     <swagger-annotations.version>2.2.9</swagger-annotations.version>
     <swagger-parser.version>2.1.13</swagger-parser.version>
-    <gson.version>2.10.1</gson.version>
-    <okhttp.version>4.11.0</okhttp.version>
-    <gson-fire.version>1.8.5</gson-fire.version>
-    <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
-    <javax.ws.rs-api.version>2.1.1</javax.ws.rs-api.version>
+    <fasterxml.version>2.15.1</fasterxml.version>
+    <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
+    <httpclient5.version>5.2.1</httpclient5.version>
 
     <!-- test -->
     <junit-jupiter.version>5.9.3</junit-jupiter.version>
@@ -92,6 +90,8 @@
     <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
     <docker-maven-plugin.version>0.42.1</docker-maven-plugin.version>
     <maven-failsafe-plugin.version>3.0.0-M9</maven-failsafe-plugin.version>
+
+    <openapi.library>apache-httpclient</openapi.library>
   </properties>
 
   <dependencies>
@@ -105,35 +105,24 @@
       <artifactId>swagger-parser</artifactId>
       <version>${swagger-parser.version}</version>
     </dependency>
+
+    <!-- http client -->
     <dependency>
-      <groupId>javax.ws.rs</groupId>
-      <artifactId>javax.ws.rs-api</artifactId>
-      <version>${javax.ws.rs-api.version}</version>
+      <groupId>org.apache.httpcomponents.client5</groupId>
+      <artifactId>httpclient5</artifactId>
+      <version>${httpclient5.version}</version>
+    </dependency>
+
+    <!-- json -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.jaxrs</groupId>
+      <artifactId>jackson-jaxrs-json-provider</artifactId>
+      <version>${fasterxml.version}</version>
     </dependency>
     <dependency>
-      <groupId>javax.annotation</groupId>
-      <artifactId>javax.annotation-api</artifactId>
-      <version>${javax.annotation-api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.squareup.okhttp3</groupId>
-      <artifactId>okhttp</artifactId>
-      <version>${okhttp.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.squareup.okhttp3</groupId>
-      <artifactId>logging-interceptor</artifactId>
-      <version>${okhttp.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>${gson.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.gsonfire</groupId>
-      <artifactId>gson-fire</artifactId>
-      <version>${gson-fire.version}</version>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>${jackson-databind-nullable.version}</version>
     </dependency>
 
     <!-- test -->
@@ -189,6 +178,7 @@
               <apiPackage>${project.groupId}.openapi.flink.api</apiPackage>
               <generateApiTests>false</generateApiTests>
               <generateModelTests>false</generateModelTests>
+              <library>${openapi.library}</library>
               <configOptions>
                 <sourceFolder>src/gen/java/main</sourceFolder>
                 <parentArtifactId>${project.parent.artifactId}</parentArtifactId>
@@ -230,6 +220,7 @@
               <apiPackage>${project.groupId}.openapi.yarn.api</apiPackage>
               <generateApiTests>false</generateApiTests>
               <generateModelTests>false</generateModelTests>
+              <library>${openapi.library}</library>
               <configOptions>
                 <sourceFolder>src/gen/java/main</sourceFolder>
                 <parentArtifactId>${project.parent.artifactId}</parentArtifactId>
